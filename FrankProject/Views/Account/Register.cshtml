@@ -1,0 +1,153 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-image: url("https://scontent-amt2-1.xx.fbcdn.net/v/t1.15752-0/p480x480/78925133_2425611691088513_6739306920152137728_n.png?_nc_cat=111&_nc_ohc=4ClYS5DjWAIAQkCT0cg9t2QkAUuaY88XRQ2D6iSCOLGd42DQRdrKHqD5Q&_nc_ht=scontent-amt2-1.xx&oh=d22e894bbb8d73bc9d3296b3f54b67da&oe=5E69036E");
+        }
+
+        .PageHeading {
+            font-size: 40px;
+            font-family: 'Lobster', cursive;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #contentheader {
+            padding: 10px 16px;
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            color: white;
+            display: flex;
+            width: 100vw;
+        }
+
+
+        #smoltitle {
+            font-family: 'Lobster', cursive;
+            color: white;
+            text-align: center;
+            font-size: 30px;
+            text-decoration:none;
+        }
+
+         a:link {
+            text-decoration: none!important;
+        }
+
+        #sortbtn {
+            margin-top: 10px;
+            border: thin white solid;
+        }
+
+        #loginbtn {
+            margin-top: 10px;
+            border: thin white solid;
+            float: right;
+        }
+
+
+        #box1 {
+            flex: 1;
+        }
+
+        #box2 {
+            flex: 1;
+        }
+
+        #box3 {
+            flex: 1;
+        }
+
+        .button {
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            color: white;
+            font-size: 22px;
+            padding: 10px;
+            width: 150px;
+            text-align: center;
+            display: inline-block;
+            border: none;
+        }
+
+        .wide {
+            width: 100vw;
+        }
+
+        .loginform {
+            display: block;
+            margin: auto;
+            width: 100%;
+            height: 30px;
+            margin-bottom: 30px;
+        }
+
+        .formbox {
+            border: black thin solid;
+            border-radius: 10px;
+            width: 50vw;
+            margin: auto;
+            padding-bottom: 50px;
+            margin-top: 50px;
+            background-color:white;
+        }
+
+        .innerFrom {
+            width: 50%;
+            display: block;
+            margin: auto;
+        }
+
+        .roboto {
+            font-family: Roboto;
+        }
+
+        .loginbtn {
+            border: none;
+            width: 100%;
+        }
+    </style>
+</head>
+
+
+
+
+
+<br />
+<div class="row formbox">
+    <div class="col-md-4 innerFrom">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" >
+            <h4 class="PageHeading">Create a new account.</h4>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="roboto" ></label>
+                <input asp-for="Email" class="form-control loginform" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="roboto" ></label>
+                <input asp-for="Password" class="form-control loginform" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="roboto" ></label>
+                <input asp-for="ConfirmPassword" class="form-control loginform" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default button loginbtn" >Register</button>
+        </form>
+    </div>
+</div>

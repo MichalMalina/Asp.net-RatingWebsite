@@ -1,0 +1,490 @@
+﻿@model IEnumerable<FrankProject.Models.Post>
+@using FrankProject.Models
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Http;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+
+
+    var Comment = new Comment();
+    var Rating = new Rating();
+
+}
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+    <title>Rate That Website | Frontpage</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("a").on('click', function (event) {
+
+
+                if (this.hash !== "") {
+
+                    event.preventDefault();
+
+
+                    var hash = this.hash;
+
+
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function () {
+
+
+                        window.location.hash = hash;
+                    });
+                }
+            });
+        });
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+
+        body {
+            margin: 0;
+            background-image: url("https://scontent-amt2-1.xx.fbcdn.net/v/t1.15752-0/p480x480/78925133_2425611691088513_6739306920152137728_n.png?_nc_cat=111&_nc_ohc=4ClYS5DjWAIAQkCT0cg9t2QkAUuaY88XRQ2D6iSCOLGd42DQRdrKHqD5Q&_nc_ht=scontent-amt2-1.xx&oh=d22e894bbb8d73bc9d3296b3f54b67da&oe=5E69036E");
+        }
+
+
+        #bigtitle {
+            font-family: 'Lobster', cursive;
+            color: white;
+            text-align: center;
+            font-size: 100px;
+            margin-top: 0px;
+            padding-top: 60px;
+            margin-bottom: 200px;
+        }
+
+        #banner {
+            height: 100vh;
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            border-bottom: black thick solid;
+        }
+
+        .buttonin {
+            border: white solid 2px;
+            background-color: dimgray;
+            color: white;
+            display: block;
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            margin: auto;
+            width: 400px;
+            text-align: center;
+            text-decoration: none;
+            height: 70px;
+            font-size: 32px;
+            padding: 10px;
+            font-family: 'Lobster', cursive;
+        }
+
+        .button {
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            color: white;
+            font-size: 22px;
+            padding: 10px;
+            width: 150px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        #contentPage {
+            min-width: 60%;
+            margin: auto;
+            margin-top: 50px;
+            min-height: 200vh;
+        }
+
+        #contentheader {
+            padding: 10px 16px;
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            color: white;
+            display: flex;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        #smoltitle {
+            font-family: 'Lobster', cursive;
+            color: white;
+            text-align: center;
+            font-size: 30px;
+            font-weight:200;
+            text-decoration:none;
+        }
+
+        #sortbtn {
+            margin-top: 10px;
+            border: thin white solid;
+        }
+
+        #loginbtn {
+            margin-top: 10px;
+            border: thin black solid;
+            float: right;
+            font-family: 'Lobster', cursive;
+            width:200px;
+            background:0;
+            background-color: #005BB9;
+        }
+
+
+        #box1 {
+            flex: 1;
+        }
+
+        #box2 {
+            flex: 1;
+        }
+
+        #box3 {
+            flex: 1;
+        }
+
+        .post {
+            display: flex;
+            margin:auto;
+            width: 60%;
+            border: 2px black solid;
+            min-height: 300px;
+            margin-bottom: 50px;
+            background-color: #f1f1f1;
+        }
+
+        .postheader {
+            width:60%;
+            margin:auto;
+            min-height: 100px;
+            border: 2px solid black;
+            display:block;
+            padding:15px;
+            font-size:34px;
+            background-color: #f1f1f1;
+            margin-top:60px;
+        }
+
+        .postheader h4 {
+            margin-top:0;
+            margin-bottom:0px;
+            font-family: 'Lobster', cursive;
+            font-weight:200;
+        }
+
+        .postheader a {
+            font-size:24px;
+            margin-left: 10px;
+        }
+
+        .postbox1 {
+            flex: 1;
+        }
+
+        .postbox2 {
+            flex: 1;
+            padding: 30px;
+            padding-left:0;
+        }
+
+
+        .postimg {
+            width: 80%;
+            display: block;
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom:30px;
+            height: auto;
+            border: thin black solid;
+        }
+
+
+        .ratingtext {
+            font-size: 24px;
+            font-family: 'Lobster', cursive;
+            font-weight:300;
+            margin-top:10px;
+            margin-bottom:5px;
+        }
+
+        .ratingtext:first-child {
+            margin-top:0;
+        }
+
+        .postrate {
+        }
+
+        .postbutton {
+            font-family: 'Lobster', cursive;
+            float: right;
+            border:none;
+            width:200px;
+
+        }
+
+        #box3 a, .postheader a {
+            text-decoration: none;
+        }
+
+        .fill {
+    text-align: right;
+    padding-right: 20px;
+    line-height: 30px;
+    color: white;
+    border-radius: 5px;
+    font-family:'Roboto';
+}
+
+        .bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+
+}
+
+        .creativity {
+            width:71%;
+            background-color: #FDB813;
+        }
+
+        .usability {
+            width:58%;
+            background-color: #32A0DA;
+
+        }
+
+        .design {
+            width:84%;
+            background-color: #F05125;
+        }
+
+
+        #filler {
+            height:98.188px;
+            display:none;
+        }
+
+        #arrow {
+            display: block;
+            margin: auto;
+            width: 2vw;
+            bottom: 30px;
+            position: absolute;
+            left: 49vw;
+
+	        animation: bounce 1.5s 1s infinite both;
+
+        }
+
+@@keyframes bounce {
+ 0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  10% {
+          -webkit-transform: translateY(-45px);
+            transform: translateY(-45px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  35% {
+    -webkit-transform: translateY(-24px);
+            transform: translateY(-24px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  60% {
+    -webkit-transform: translateY(-12px);
+            transform: translateY(-12px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  77% {
+    -webkit-transform: translateY(-6px);
+            transform: translateY(-6px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  87% {
+    -webkit-transform: translateY(-4px);
+            transform: translateY(-4px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  20%,
+  50%,
+  70%,
+  83% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+              95% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+}
+
+
+
+
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+    <div id="banner">
+        <h1 id="bigtitle">Rate That Website</h1>
+
+        <a href="#jump" class="buttonin">Go To Websites</a>
+        <br>
+        <a asp-controller="Posts" asp-action="Index" class="buttonin">Rate New Website</a>
+
+        <img id="arrow" src="https://myrnss.com/wp-content/uploads/2016/05/white-arrow-down.png" alt="">
+
+    </div>
+
+    <div id="contentheader">
+        <div id="box1">
+        </div>
+        <div id="box2">
+            <h1 id="smoltitle">Rate That Website</h1>
+        </div>
+        <div id=box3>
+            <a asp-controller="Posts" asp-action="Index" class="button" id="loginbtn">Rate New Website</a>
+
+        </div>
+
+    </div>
+    @foreach (var item in Model)
+    {
+        <section id="contentPage">
+            <div id="filler"> </div>
+
+            <button class="" id="jump">Sort</button>
+
+            <div class="postheader">
+               
+                <a href="postpage.html" class="postbutton button"> See More</a>
+                <h4>  @Html.DisplayFor(modelItem => item.Heading)</h4>
+                <a> @Html.DisplayFor(modelItem => item.Url)</a>
+            </div>
+
+
+            <div class="post">
+
+                <div class="postbox1">
+                    <img src="https://scontent-amt2-1.xx.fbcdn.net/v/t1.15752-0/p480x480/79801104_2714783271890169_1293173034592501760_n.png?_nc_cat=104&_nc_ohc=KEwwO4Qw10AAQnFyOPJVdR_WY8ePZI4K4frw7Xgadtx3DTDlNQS2DIJYw&_nc_ht=scontent-amt2-1.xx&oh=476a4b3979d901d83cac56d9c0799ccf&oe=5E6E9ED0" class="postimg" alt="">
+                </div>
+
+
+                <div class="postbox2">
+                    <p class="ratingtext">Creativity</p>
+                    <div class="bar">
+                        <div class="fill creativity">
+                            7.1
+                        </div>
+                    </div>
+
+                    <p class="ratingtext">Usability</p>
+                    <div class="bar">
+                        <div class="fill usability">
+                            5.8
+                        </div>
+                    </div>
+
+                    <p class="ratingtext">Design</p>
+                    <div class="bar">
+                        <div class="fill design">
+                            8.4
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </section>
+    }
+        <script>
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            var header = document.getElementById("contentheader");
+            var sticky = header.offsetTop;
+            var filler = document.getElementById("filler")
+
+            function myFunction() {
+                if (window.pageYOffset > sticky) {
+                    header.classList.add("sticky");
+                    filler.style.display = "block";
+                } else {
+                    header.classList.remove("sticky");
+                    filler.style.display = "none";
+                }
+            }
+
+        </script>
+
+
+
+    </body>
+
+</html>
+

@@ -1,0 +1,45 @@
+﻿@model FrankProject.Models.Rating
+@using FrankProject.Models;
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<div class="form-group">
+    <label asp-for="Creativity" class="control-label"></label>
+    <input asp-for="Creativity" class="form-control" />
+    <span asp-validation-for="Creativity" class="text-danger"></span>
+</div>
+
+    
+    <input asp-for="Usability" class="form-control" />
+    <span asp-validation-for="Usability" class="text-danger"></span>
+
+
+
+<div class="form-group">
+    <label asp-for="Design" class="control-label"></label>
+    <input type="radio" value="1" asp-for="Design" class="form-control" checked />
+    <span asp-validation-for="Design" class="text-danger"></span>
+</div>
+
+    <label asp-for="Design" class="control-label"></label>
+    <input type="radio" value="2" asp-for="Design" class="form-control" />
+    <span asp-validation-for="Design" class="text-danger"></span>
+
+
+   
+    <input type="radio" value="3" asp-for="Design" class="form-control" />
+   
+
+
+
+
+
+
+
+
+<div class="form-group">
+    <input type="submit" value="Create" class="btn btn-primary" />
+</div>

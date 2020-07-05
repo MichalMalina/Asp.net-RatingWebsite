@@ -1,0 +1,343 @@
+﻿@model FrankProject.Models.Post
+@using FrankProject.Models
+
+@{
+    ViewData["Title"] = "RateIt";
+}
+@{
+
+    var Comment = new Comment();
+    var Rating = new Rating();
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+
+
+
+
+    <title>Rate That Website | Frontpage</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-image: url("https://scontent-amt2-1.xx.fbcdn.net/v/t1.15752-9/78925133_2425611691088513_6739306920152137728_n.png?_nc_cat=111&_nc_ohc=Ot2VDYMFjFEAQmRKb_qJG8OpZwKU_mtN4iudMrnTAlGN7d59qTPi5qAGg&_nc_ht=scontent-amt2-1.xx&oh=69471b8998bd98dedca6a6c17faa8a01&oe=5E82112F");
+        }
+
+
+        #bigtitle {
+            font-family: 'Lobster', cursive;
+            color: white;
+            text-align: center;
+            font-size: 100px;
+            margin-top: 0;
+            padding-top: 40px;
+            margin-bottom: 200px;
+        }
+
+        #banner {
+            height: 100vh;
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            border-bottom: black thick solid;
+        }
+
+        .buttonin {
+            border: white solid 2px;
+            background-color: dimgray;
+            color: white;
+            display: block;
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            margin: auto;
+            width: 400px;
+            text-align: center;
+            text-decoration: none;
+            height: 70px;
+            font-size: 32px;
+            padding: 10px;
+        }
+
+        .button {
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            color: white;
+            font-size: 22px;
+            padding: 10px;
+            width: 150px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        #contentPage {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+            min-height: 200vh;
+        }
+
+        #contentheader {
+            padding: 10px 16px;
+            background: linear-gradient(130deg, rgba(0, 43, 101, 1) 0%, rgba(0, 104, 208, 1) 100%);
+            color: white;
+            display: flex;
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        #smoltitle {
+            font-family: 'Lobster', cursive;
+            color: white;
+            text-align: center;
+            font-size: 30px;
+            text-decoration:none;
+        }
+
+          a:link{
+            text-decoration: none!important;
+        }
+
+        #sortbtn {
+            margin-top: 10px;
+            border: thin white solid;
+        }
+
+        #loginbtn {
+            margin-top: 10px;
+            border: thin white solid;
+            float: right;
+        }
+
+
+        #box1 {
+            flex: 1;
+        }
+
+        #box2 {
+            flex: 1;
+        }
+
+        #box3 {
+            flex: 1;
+        }
+
+        .post {
+            display: flex;
+            width: 100%;
+            border: thick green solid;
+            height: 400px;
+            margin-bottom: 50px;
+            border-radius: 30px;
+        }
+
+        .postbox1 {
+            flex: 1;
+            border: red solid medium;
+        }
+
+        .postbox2 {
+            border: red solid medium;
+            flex: 1;
+            padding-left: 30px;
+        }
+
+
+        .postimg {
+            width: 80%;
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+            height: auto;
+        }
+
+
+        .posttitle {
+            font-size: 30px;
+        }
+
+        .ty {
+            height: auto;
+            width: 60%;
+            margin: auto;
+            border: 3px black solid;
+            background-color: #f1f1f1;
+            margin-top: 100px;
+            margin-bottom: 200px;
+        }
+
+        .tytitle {
+            font-family: 'Lobster', cursive;
+            font-size: 36px;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .ty p {
+            font-size: 24px;
+            text-align: left;
+            margin-left: 50px;
+            margin-right: 30px;
+            margin-bottom: 30px;
+            margin-top: 10px;
+        }
+
+
+        .ty button {
+            display: block;
+            margin: auto;
+            margin-top: 100px;
+            width: 400px;
+            font-family: 'Lobster', cursive;
+            font-size: 36px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-bottom: 50px;
+        }
+
+        .ratingtext {
+            font-size: 30px;
+            font-family: 'Lobster', cursive;
+            font-weight: 300;
+            margin-top: 40px;
+            margin-bottom: 5px;
+            margin-left: 30px;
+        }
+
+
+        #line {
+            width: 100%;
+            border: 1px solid black;
+            border-bottom: 2px black solid;
+        }
+
+
+
+
+            .rating label {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                cursor: pointer;
+            }
+
+                .rating label:last-child {
+                    position: static;
+                }
+
+                .rating label:nth-child(1) {
+                    z-index: 5;
+                }
+
+                .rating label:nth-child(2) {
+                    z-index: 4;
+                }
+
+                .rating label:nth-child(3) {
+                    z-index: 3;
+                }
+
+                .rating label:nth-child(4) {
+                    z-index: 2;
+                }
+
+                .rating label:nth-child(5) {
+                    z-index: 1;
+                }
+
+                .rating label input {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                }
+
+                .rating label .icon {
+                    float: left;
+                    color: transparent;
+                }
+
+                .rating label:last-child .icon {
+                    color: #000;
+                }
+
+            .rating:not(:hover) label input:checked ~ .icon,
+            .rating:hover label:hover input ~ .icon {
+                color: gold;
+            }
+
+            .rating label input:focus:not(:checked) ~ .icon:last-child {
+                color: #000;
+                text-shadow: 0 0 5px #09f;
+            }
+
+
+        .stars {
+            margin-left: 40px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+  
+
+
+
+    <div class="ty">
+        <h4 class="tytitle">Website name - Short description</h4>
+        <hr id="line">
+
+
+        <form asp-controller="Ratings" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PostId" />
+            @await Html.PartialAsync("_ratingcreate2", Rating)
+           
+        </form>
+
+
+        
+    </div>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

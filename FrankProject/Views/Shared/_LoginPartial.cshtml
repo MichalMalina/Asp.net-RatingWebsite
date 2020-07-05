@@ -1,0 +1,98 @@
+@using Microsoft.AspNetCore.Identity
+@using FrankProject.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<div id="contentheader">
+    @if (SignInManager.IsSignedIn(User))
+        {
+    <div id="box0">
+        <a class="welcome" asp-area="" asp-controller="Home" asp-action="Index">Hello @UserManager.GetUserName(User)!</a>
+    </div>
+    <div id="box1">
+        <a asp-area="" asp-action="Index" asp-controller="Posts">
+            <div id="box2">
+
+                <h1 id="smoltitle">Rate That Website</h1>
+
+            </div>
+        </a>
+    </div>
+
+    <div id="box3">
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+            <div id="box4">
+                <button type="submit" class="button">Log out</button>
+            </div>
+        </form>
+    </div>
+        }
+        else
+        {
+    <div id="box1">
+        <div id="box5">
+            <a asp-area="" asp-action="Index" asp-controller="Posts">
+                <div id="box2">
+
+                    <h1 id="smoltitle">Rate That Website</h1>
+
+                </div>
+            </a>
+        </div>
+    </div>
+    <div id="loginreg">
+        <div id="reg" style="float:left; padding-left:20px;"><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></div>
+        <div id="login" style="float:left; padding-left:20px;"><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></div>
+    </div>
+        }
+</div>
+
+<style>
+    #box0 {
+        float: left;
+        margin: 15px 0 0 0px;
+    }
+
+    #box1 {
+        margin: auto;
+        justify-content: center;
+        max-width: 400px;
+    }
+
+    #box2 {
+    }
+
+    #box3 {
+        margin: 10px 0 0px 0;
+        max-width: 180px;
+    }
+
+     a:link {
+            text-decoration: none!important;
+        }
+
+    #box5 {
+        margin-left: 140px;
+    }
+
+    .button {
+        border: white thin solid;
+    }
+
+    #box4 {
+        float: right;
+    }
+
+    #loginreg a {
+        color: white;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    #reg {
+        text-decoration: none;
+        color: white;
+    }
+</style>

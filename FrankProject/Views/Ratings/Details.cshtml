@@ -1,0 +1,61 @@
+﻿@model FrankProject.Models.Rating
+
+@{
+
+
+
+
+
+
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Rating</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Post)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Post.PostId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Creativity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Creativity)
+           
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Usability)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Usability)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Design)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Design)
+        </dd>
+    </dl>
+</div>
+
+@ViewBag.avg
+@ViewBag.avg2
+@ViewBag.avg3
+
+
+
+
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RatingId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+<form asp-action="Edit">
+</form>
